@@ -1,4 +1,4 @@
-package org.ca1.studyapp.activities
+package org.ca1.studyapp.views
 
 import android.os.Bundle
 import android.view.Menu

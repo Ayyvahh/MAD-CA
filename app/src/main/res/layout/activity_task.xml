@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorSurface"
-    tools:context="org.ca1.studyapp.activities.TaskActivity">
+    tools:context="org.ca1.studyapp.views.TaskActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

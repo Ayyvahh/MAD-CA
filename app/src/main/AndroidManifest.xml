@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Material3.Light.NoActionBar">
-        <activity android:name=".activities.TaskListActivity"
+        <activity
+            android:name=".views.TaskListView"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,7 +22,7 @@
             <meta-data android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity android:name=".activities.TaskActivity">
+        <activity android:name=".views.TaskActivity">
             <meta-data android:name="android.app.lib_name"
                 android:value="" />
         </activity>
