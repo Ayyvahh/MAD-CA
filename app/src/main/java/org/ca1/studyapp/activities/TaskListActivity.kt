@@ -40,7 +40,7 @@ class TaskListActivity : AppCompatActivity(), TaskListener {
 
     private fun refreshList(includeCompleted: Boolean) {
         val tasks = if (includeCompleted) {
-            app.tasks.findAll()
+            app.tasks.findAll().filter { it.completed }
         } else {
             app.tasks.findAll().filter { !it.completed }
         }
