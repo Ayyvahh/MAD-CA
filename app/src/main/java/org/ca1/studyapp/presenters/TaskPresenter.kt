@@ -1,12 +1,11 @@
 package org.ca1.studyapp.presenters
 
-import org.ca1.studyapp.models.TaskMemStore
+import org.ca1.studyapp.data.FirebaseStore
 import org.ca1.studyapp.models.TaskModel
 import org.ca1.studyapp.views.TaskView
 
-class TaskPresenter(view: TaskView) {
+class TaskPresenter(private val view: TaskView, private val store: FirebaseStore) {
 
-    private val store: TaskMemStore = (view.application as org.ca1.studyapp.main.MainApp).tasks
 
     fun addTask(task: TaskModel) {
         store.create(task)

@@ -16,14 +16,11 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-
-//TODO: JSON STORAGE
-//TODO: ADD LIST SORTING BY TYPE/DEADLINE
 class TaskView : AppCompatActivity() {
     private lateinit var binding: ActivityTaskBinding
     var task = TaskModel()
     lateinit var app: MainApp
-    private lateinit var controller: TaskPresenter
+    private lateinit var presenter: TaskPresenter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +32,7 @@ class TaskView : AppCompatActivity() {
         setSupportActionBar(binding.toolbarAdd)
 
         app = application as MainApp
-        controller = TaskPresenter(this)
+        presenter = TaskPresenter(this, app.store)
 
         if (intent.hasExtra("task_edit")) {
             edit = true
@@ -85,16 +82,15 @@ class TaskView : AppCompatActivity() {
                 else -> TaskType.TASK
             }
 
-            val error = controller.validateTask(task)
+            val error = presenter.validateTask(task)
             if (error != null) {
                 Snackbar.make(it, error, Snackbar.LENGTH_LONG).show()
             } else {
                 if (edit) {
-                    controller.updateTask(task.copy())
+                    presenter.updateTask(task.copy())
                 } else {
-                    controller.addTask(task.copy())
+                    presenter.addTask(task.copy())
                 }
-                setResult(RESULT_OK)
                 finish()
             }
         }
