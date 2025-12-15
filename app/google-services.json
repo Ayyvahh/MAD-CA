@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "445089136292",
+    "project_id": "studyapp-faccf",
+    "storage_bucket": "studyapp-faccf.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:445089136292:android:8d4114265701a639b1f031",
+        "android_client_info": {
+          "package_name": "org.ca1.studyapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCj7VdGYmSI08Jiafa3-bkHytA4O-_F86Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
