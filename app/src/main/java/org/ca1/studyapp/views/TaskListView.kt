@@ -3,6 +3,7 @@ package org.ca1.studyapp.views
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.ca1.studyapp.R
@@ -66,7 +67,18 @@ class TaskListView : AppCompatActivity(), TaskListener {
         controller.doUpdateTask(task, isChecked)
     }
 
+    // Ref: https://stackoverflow.com/questions/59340099/how-to-set-confirm-delete-alertdialogue-box-in-kotlin
     override fun onTaskDelete(task: TaskModel) {
-        controller.doDeleteTask(task)
+        AlertDialog.Builder(this)
+            .setTitle("Delete Task")
+            .setMessage("Are you sure you want to delete this task?")
+            .setPositiveButton("Yes") { _, _ ->
+                controller.doDeleteTask(task)
+            }
+            .setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+            .show()
     }
 }
