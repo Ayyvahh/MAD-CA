@@ -1,4 +1,4 @@
-package org.ca1.studyapp.controllers
+package org.ca1.studyapp.presenters
 
 import android.app.Activity
 import android.content.Intent
@@ -9,7 +9,7 @@ import org.ca1.studyapp.models.TaskModel
 import org.ca1.studyapp.views.TaskListView
 import org.ca1.studyapp.views.TaskView
 
-class TaskListController(val view: TaskListView) {
+class TaskListPresenter(val view: TaskListView) {
 
     var app: MainApp = view.application as MainApp
     private lateinit var refreshIntentLauncher: ActivityResultLauncher<Intent>
