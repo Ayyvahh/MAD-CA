@@ -12,13 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Material3.Light.NoActionBar">
         <activity
-            android:name=".views.TaskListView"
-            android:exported="true">
+            android:name=".views.SplashScreenView"
+            android:exported="true"
+            android:theme="@style/Theme.StudyApp.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
+        </activity>
+        <activity
+            android:name=".views.TaskListView"
+            android:exported="true">
             <meta-data android:name="android.app.lib_name"
                 android:value="" />
         </activity>
