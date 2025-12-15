@@ -6,8 +6,8 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import org.ca1.studyapp.main.MainApp
 import org.ca1.studyapp.models.TaskModel
-import org.ca1.studyapp.views.TaskActivity
 import org.ca1.studyapp.views.TaskListView
+import org.ca1.studyapp.views.TaskView
 
 class TaskListController(val view: TaskListView) {
 
@@ -29,12 +29,12 @@ class TaskListController(val view: TaskListView) {
     }
 
     fun doAddTask() {
-        val launcherIntent = Intent(view, TaskActivity::class.java)
+        val launcherIntent = Intent(view, TaskView::class.java)
         refreshIntentLauncher.launch(launcherIntent)
     }
 
     fun doEditTask(task: TaskModel) {
-        val launcherIntent = Intent(view, TaskActivity::class.java)
+        val launcherIntent = Intent(view, TaskView::class.java)
         launcherIntent.putExtra("task_edit", task)
         refreshIntentLauncher.launch(launcherIntent)
     }

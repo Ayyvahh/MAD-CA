@@ -19,7 +19,7 @@ import java.util.Locale
 
 //TODO: JSON STORAGE
 //TODO: ADD LIST SORTING BY TYPE/DEADLINE
-class TaskActivity : AppCompatActivity() {
+class TaskView : AppCompatActivity() {
     private lateinit var binding: ActivityTaskBinding
     var task = TaskModel()
     lateinit var app: MainApp
