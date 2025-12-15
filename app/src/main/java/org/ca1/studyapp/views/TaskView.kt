@@ -7,11 +7,11 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.snackbar.Snackbar
 import org.ca1.studyapp.R
-import org.ca1.studyapp.controllers.TaskController
 import org.ca1.studyapp.databinding.ActivityTaskBinding
 import org.ca1.studyapp.main.MainApp
 import org.ca1.studyapp.models.TaskModel
 import org.ca1.studyapp.models.TaskType
+import org.ca1.studyapp.presenters.TaskPresenter
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -23,7 +23,7 @@ class TaskView : AppCompatActivity() {
     private lateinit var binding: ActivityTaskBinding
     var task = TaskModel()
     lateinit var app: MainApp
-    private lateinit var controller: TaskController
+    private lateinit var controller: TaskPresenter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +35,7 @@ class TaskView : AppCompatActivity() {
         setSupportActionBar(binding.toolbarAdd)
 
         app = application as MainApp
-        controller = TaskController(app.tasks)
+        controller = TaskPresenter(this)
 
         if (intent.hasExtra("task_edit")) {
             edit = true
@@ -113,4 +113,4 @@ class TaskView : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-    }
+}
