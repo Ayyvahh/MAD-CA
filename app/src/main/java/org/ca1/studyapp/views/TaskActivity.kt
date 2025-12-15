@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.snackbar.Snackbar
 import org.ca1.studyapp.R
+import org.ca1.studyapp.controllers.TaskController
 import org.ca1.studyapp.databinding.ActivityTaskBinding
 import org.ca1.studyapp.main.MainApp
 import org.ca1.studyapp.models.TaskModel
@@ -22,6 +23,7 @@ class TaskActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTaskBinding
     var task = TaskModel()
     lateinit var app: MainApp
+    private lateinit var controller: TaskController
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +35,7 @@ class TaskActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbarAdd)
 
         app = application as MainApp
+        controller = TaskController(app.tasks)
 
         if (intent.hasExtra("task_edit")) {
             edit = true
@@ -82,25 +85,14 @@ class TaskActivity : AppCompatActivity() {
                 else -> TaskType.TASK
             }
 
-            if (task.title.isEmpty()) {
-                Snackbar.make(it, R.string.enter_task_title, Snackbar.LENGTH_LONG).show()
-            } else if (task.title.length < 3) {
-                Snackbar.make(it, "Task title must be at least 3 characters", Snackbar.LENGTH_LONG)
-                    .show()
-            } else if (task.title.length > 100) {
-                Snackbar.make(it, "Task title must not exceed 100 characters", Snackbar.LENGTH_LONG)
-                    .show()
-            } else if (task.description.length > 300) {
-                Snackbar.make(
-                    it,
-                    "Task description must not exceed 300 characters",
-                    Snackbar.LENGTH_LONG
-                ).show()
+            val error = controller.validateTask(task)
+            if (error != null) {
+                Snackbar.make(it, error, Snackbar.LENGTH_LONG).show()
             } else {
                 if (edit) {
-                    app.tasks.update(task.copy())
+                    controller.updateTask(task.copy())
                 } else {
-                    app.tasks.create(task.copy())
+                    controller.addTask(task.copy())
                 }
                 setResult(RESULT_OK)
                 finish()
@@ -121,4 +113,4 @@ class TaskActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-}
+    }
