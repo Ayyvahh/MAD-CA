@@ -1,9 +1,12 @@
-package org.ca1.studyapp.controllers
+package org.ca1.studyapp.presenters
 
 import org.ca1.studyapp.models.TaskMemStore
 import org.ca1.studyapp.models.TaskModel
+import org.ca1.studyapp.views.TaskView
 
-class TaskController(private val store: TaskMemStore) {
+class TaskPresenter(view: TaskView) {
+
+    private val store: TaskMemStore = (view.application as org.ca1.studyapp.main.MainApp).tasks
 
     fun addTask(task: TaskModel) {
         store.create(task)

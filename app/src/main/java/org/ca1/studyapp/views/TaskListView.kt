@@ -9,18 +9,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import org.ca1.studyapp.R
 import org.ca1.studyapp.adapters.TaskAdapter
 import org.ca1.studyapp.adapters.TaskListener
-import org.ca1.studyapp.controllers.TaskListController
 import org.ca1.studyapp.databinding.ActivityTaskListBinding
 import org.ca1.studyapp.models.TaskModel
+import org.ca1.studyapp.presenters.TaskListPresenter
 
 class TaskListView : AppCompatActivity(), TaskListener {
 
     private lateinit var binding: ActivityTaskListBinding
-    lateinit var controller: TaskListController
+    lateinit var controller: TaskListPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        controller = TaskListController(this)
+        controller = TaskListPresenter(this)
 
         binding = ActivityTaskListBinding.inflate(layoutInflater)
         setContentView(binding.root)
