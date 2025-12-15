@@ -1,60 +1,42 @@
 package org.ca1.studyapp.presenters
 
-import android.app.Activity
 import android.content.Intent
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
-import org.ca1.studyapp.main.MainApp
+import org.ca1.studyapp.data.FirebaseStore
 import org.ca1.studyapp.models.TaskModel
 import org.ca1.studyapp.views.TaskListView
 import org.ca1.studyapp.views.TaskView
 
-class TaskListPresenter(val view: TaskListView) {
-
-    var app: MainApp = view.application as MainApp
-    private lateinit var refreshIntentLauncher: ActivityResultLauncher<Intent>
-
-    init {
-        registerRefreshCallback()
-    }
-
-    fun getTasks() = app.tasks.findAll()
+class TaskListPresenter(
+    private val view: TaskListView,
+    private val store: FirebaseStore
+) {
 
     fun getFilteredTasks(includeCompleted: Boolean): List<TaskModel> {
+        val allTasks = store.findAll()
         return if (includeCompleted) {
-            getTasks().filter { it.completed }
+            allTasks.filter { it.completed }
         } else {
-            getTasks().filter { !it.completed }
+            allTasks.filter { !it.completed }
         }
     }
 
     fun doAddTask() {
-        val launcherIntent = Intent(view, TaskView::class.java)
-        refreshIntentLauncher.launch(launcherIntent)
+        val intent = Intent(view, TaskView::class.java)
+        view.startActivity(intent)  // Simple startActivity
     }
 
     fun doEditTask(task: TaskModel) {
-        val launcherIntent = Intent(view, TaskView::class.java)
-        launcherIntent.putExtra("task_edit", task)
-        refreshIntentLauncher.launch(launcherIntent)
+        val intent = Intent(view, TaskView::class.java)
+        intent.putExtra("task_edit", task)
+        view.startActivity(intent)
     }
 
     fun doUpdateTask(task: TaskModel, isChecked: Boolean) {
         task.completed = isChecked
-        app.tasks.update(task)
-        view.onRefresh()
+        store.update(task)
     }
 
     fun doDeleteTask(task: TaskModel) {
-        app.tasks.delete(task)
-        view.onRefresh()
-    }
-
-    private fun registerRefreshCallback() {
-        refreshIntentLauncher = view.registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
-        ) {
-            if (it.resultCode == Activity.RESULT_OK) view.onRefresh()
-        }
+        store.delete(task)
     }
 }
