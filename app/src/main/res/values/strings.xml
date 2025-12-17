@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">StudyApp</string>
+    <string name="app_name">Study Tasks Manager</string>
     <string name="menu_cancel" />
     <string name="button_addTask">Add Task</string>
     <string name="hint_taskTitle">Task Title</string>
@@ -24,5 +24,9 @@
     <string name="deadline_format">Due: %s</string>
     <string name="completed">Completed</string>
     <string name="show_completed">Show completed</string>
+    <string name="google_sign_in_client_id">445089136292-84154ci9khva6prog7trr5ndlg4pvfde.apps.googleusercontent.com</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="welcometext">Sign in with Google to manage your tasks!</string>
 
 </resources>

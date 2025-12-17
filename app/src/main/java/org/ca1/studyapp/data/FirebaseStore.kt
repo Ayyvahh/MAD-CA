@@ -21,18 +21,19 @@ import org.ca1.studyapp.models.TaskModel
 import org.ca1.studyapp.models.TaskStore
 import timber.log.Timber
 
-class FirebaseStore : TaskStore {
+class FirebaseStore(private val authManager: FirebaseAuthManager) : TaskStore {
     private val database =
         FirebaseDatabase.getInstance("https://studyapp-faccf-default-rtdb.europe-west1.firebasedatabase.app")
-    private val tasksRef = database.getReference("tasks")
+    private var tasksRef = database.getReference("tasks")
 
     private val tasksList = mutableListOf<TaskModel>()
     private val _tasksLiveData = MutableLiveData<List<TaskModel>>()
 
     val tasksLiveData: LiveData<List<TaskModel>> = _tasksLiveData
 
-
-    init {
+    fun initForUser() {
+        val userId = authManager.getCurrentUser()?.uid ?: return
+        tasksRef = database.getReference("users/$userId/tasks")
         tasksRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 Timber.i("onDataChange called, children count: ${snapshot.childrenCount}")
