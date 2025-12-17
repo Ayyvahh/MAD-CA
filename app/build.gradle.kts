@@ -56,4 +56,7 @@ dependencies {
     implementation(libs.firebase.database.ktx)
     implementation(libs.androidx.lifecycle.livedata.ktx)
 
+    implementation("com.google.firebase:firebase-auth-ktx:22.3.1")
+    implementation("com.google.android.gms:play-services-auth:21.0.0")
+
 }

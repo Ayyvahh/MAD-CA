@@ -1,9 +1,9 @@
 package org.ca1.studyapp.views
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,15 +20,15 @@ class TaskListView : AppCompatActivity(), TaskListener {
     lateinit var presenter: TaskListPresenter
     lateinit var app: MainApp
 
-
-    private val taskLauncher = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) {
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         app = application as MainApp
+
+        if (!app.authManager.isUserSignedIn()) {
+            navigateToLogin()
+            return
+        }
+
         presenter = TaskListPresenter(this, app.store)
 
         binding = ActivityTaskListBinding.inflate(layoutInflater)
@@ -60,8 +60,30 @@ class TaskListView : AppCompatActivity(), TaskListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_add -> presenter.doAddTask()
+            R.id.item_sign_out -> showSignOutDialog()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun showSignOutDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("Sign Out")
+            .setMessage("Are you sure you want to sign out?")
+            .setPositiveButton("Yes") { _, _ ->
+                app.authManager.signOut {
+                    navigateToLogin()
+                }
+            }
+            .setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+            .show()
+    }
+
+    private fun navigateToLogin() {
+        startActivity(Intent(this, LoginView::class.java))
+        finish()
     }
 
     override fun onTaskClick(task: TaskModel) {
@@ -72,7 +94,6 @@ class TaskListView : AppCompatActivity(), TaskListener {
         presenter.doUpdateTask(task, isChecked)
     }
 
-    // Ref: https://stackoverflow.com/questions/59340099/how-to-set-confirm-delete-alertdialogue-box-in-kotlin
     override fun onTaskDelete(task: TaskModel) {
         AlertDialog.Builder(this)
             .setTitle("Delete Task")

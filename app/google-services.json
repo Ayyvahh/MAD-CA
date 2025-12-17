@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "445089136292",
+    "firebase_url": "https://studyapp-faccf-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "studyapp-faccf",
     "storage_bucket": "studyapp-faccf.firebasestorage.app"
   },
@@ -12,7 +13,20 @@
           "package_name": "org.ca1.studyapp"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "445089136292-g6outuim8vo43vk72oqasaam1a2lthf2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.ca1.studyapp",
+            "certificate_hash": "832e8b3df42be2e7ec726179378af4dbcdb5813f"
+          }
+        },
+        {
+          "client_id": "445089136292-84154ci9khva6prog7trr5ndlg4pvfde.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCj7VdGYmSI08Jiafa3-bkHytA4O-_F86Y"
@@ -20,7 +34,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "445089136292-84154ci9khva6prog7trr5ndlg4pvfde.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
