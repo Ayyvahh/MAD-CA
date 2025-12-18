@@ -3,6 +3,7 @@ package org.ca1.studyapp.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import org.ca1.studyapp.databinding.CardTaskBinding
 import org.ca1.studyapp.models.TaskModel
@@ -39,9 +40,31 @@ class TaskAdapter (private var tasks: List<TaskModel>,
             binding.taskType.text = task.type.name
             binding.taskDone.isChecked = task.completed
 
+            binding.taskDone.setOnCheckedChangeListener(null)
             binding.taskDone.isChecked = task.completed
             binding.taskDone.setOnCheckedChangeListener { _, isChecked ->
-                listener.onTaskCheckChanged(task, isChecked)
+                if (isChecked && !task.completed) {
+                    val context = binding.root.context
+
+                    // Ref: https://chatgpt.com/share/694370be-8bf4-8005-aa6e-52b680eec751
+                    val animation = android.view.animation.AnimationUtils.loadAnimation(
+                        context,
+                        org.ca1.studyapp.R.anim.task_complete
+                    )
+                    animation.setAnimationListener(object :
+                        android.view.animation.Animation.AnimationListener {
+                        override fun onAnimationStart(animation: android.view.animation.Animation?) {}
+                        override fun onAnimationEnd(animation: android.view.animation.Animation?) {
+                            listener.onTaskCheckChanged(task, isChecked)
+                        }
+
+                        override fun onAnimationRepeat(animation: android.view.animation.Animation?) {}
+                    })
+                    binding.root.startAnimation(animation)
+                    Toast.makeText(context, "Task completed", Toast.LENGTH_SHORT).show()
+                } else {
+                    listener.onTaskCheckChanged(task, isChecked)
+                }
             }
 
             binding.deleteButton.setOnClickListener { listener.onTaskDelete(task) }
