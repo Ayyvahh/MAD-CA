@@ -39,4 +39,8 @@ class TaskListPresenter(
     fun doDeleteTask(task: TaskModel) {
         store.delete(task)
     }
+
+    fun doClearAllTasks() {
+        store.clearAllTasks()
+    }
 }

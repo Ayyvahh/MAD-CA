@@ -84,4 +84,7 @@ class FirebaseStore(private val authManager: FirebaseAuthManager) : TaskStore {
             Timber.e("Cannot delete: task has no id")
         }
     }
+    fun clearAllTasks() {
+        tasksRef.removeValue()
+    }
 }

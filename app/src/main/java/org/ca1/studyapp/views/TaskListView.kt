@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -61,6 +62,7 @@ class TaskListView : AppCompatActivity(), TaskListener {
         when (item.itemId) {
             R.id.item_add -> presenter.doAddTask()
             R.id.item_sign_out -> showSignOutDialog()
+            R.id.item_clear_all -> showClearAllTasksDialog()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -75,6 +77,21 @@ class TaskListView : AppCompatActivity(), TaskListener {
                 }
             }
             .setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .create()
+            .show()
+    }
+
+    private fun showClearAllTasksDialog() {
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.clear_all_tasks_dialog_title))
+            .setMessage(getString(R.string.clear_all_tasks_dialog_message))
+            .setPositiveButton(android.R.string.yes) { _, _ ->
+                presenter.doClearAllTasks()
+                Toast.makeText(this, getString(R.string.tasks_cleared), Toast.LENGTH_SHORT).show()
+            }
+            .setNegativeButton(android.R.string.no) { dialog, _ ->
                 dialog.dismiss()
             }
             .create()

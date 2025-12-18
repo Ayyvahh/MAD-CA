@@ -28,5 +28,8 @@
     <string name="sign_in_with_google">Sign in with Google</string>
     <string name="sign_out">Sign Out</string>
     <string name="welcometext">Sign in with Google to manage your tasks!</string>
-
+    <string name="clear_all_tasks">Clear All Tasks</string>
+    <string name="clear_all_tasks_dialog_title">Clear All Tasks</string>
+    <string name="clear_all_tasks_dialog_message">Are you sure you want to clear all tasks?</string>
+    <string name="tasks_cleared">All tasks have been cleared.</string>
 </resources>
