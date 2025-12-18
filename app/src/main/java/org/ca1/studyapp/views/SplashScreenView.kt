@@ -26,14 +26,13 @@ class SplashScreenView : AppCompatActivity() {
             insets
         }
 
-        // Handler to delay the screen for 3 seconds
+        // Ref: https://www.geeksforgeeks.org/android/android-creating-a-splash-screen/?utm_source=chatgpt.com
         Handler(Looper.getMainLooper()).postDelayed(
             {
-                val intent = Intent(this, TaskListView::class.java)
+                val intent = Intent(this, LoginView::class.java)
                 startActivity(intent)
                 finish()
             }, 3000
         )
-        // 3000 is the delayed time in milliseconds.
     }
 }

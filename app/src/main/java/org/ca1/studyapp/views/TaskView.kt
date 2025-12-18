@@ -3,9 +3,9 @@ package org.ca1.studyapp.views
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.android.material.snackbar.Snackbar
 import org.ca1.studyapp.R
 import org.ca1.studyapp.databinding.ActivityTaskBinding
 import org.ca1.studyapp.main.MainApp
@@ -84,7 +84,7 @@ class TaskView : AppCompatActivity() {
 
             val error = presenter.validateTask(task)
             if (error != null) {
-                Snackbar.make(it, error, Snackbar.LENGTH_LONG).show()
+                Toast.makeText(this, error, Toast.LENGTH_LONG).show()
             } else {
                 if (edit) {
                     presenter.updateTask(task.copy())

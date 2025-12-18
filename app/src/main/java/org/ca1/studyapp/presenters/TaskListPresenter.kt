@@ -22,7 +22,7 @@ class TaskListPresenter(
 
     fun doAddTask() {
         val intent = Intent(view, TaskView::class.java)
-        view.startActivity(intent)  // Simple startActivity
+        view.startActivity(intent) // Simple startActivity
     }
 
     fun doEditTask(task: TaskModel) {
@@ -38,5 +38,9 @@ class TaskListPresenter(
 
     fun doDeleteTask(task: TaskModel) {
         store.delete(task)
+    }
+
+    fun doClearAllTasks() {
+        store.clearAllTasks()
     }
 }
